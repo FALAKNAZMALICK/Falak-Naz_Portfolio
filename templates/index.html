@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Falak Naz — Machine Learning Engineering Intern and Computer Science undergraduate focused on Data Science, AI and ML.">
+  <title>Falak Naz — Data · ML · AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="nav">
+    <a class="brand" href="#top">FN<span>.</span></a>
+    <nav id="navLinks">
+      <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#chat">Ask Falak</a>
+    </nav>
+    <button class="menu" id="menu" aria-label="Open menu">☰</button>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy reveal">
+        <div class="kicker"><span></span> AVAILABLE FOR  DATA SCIENTIST/ ML ENGINEER OPPORTUNITIES</div>
+        <h1>Falak<br><em>Naz</em></h1>
+        <div class="role-line"><b id="roleText">Data Scientist</b><i></i></div>
+        <p class="hero-lead">{{ data.summary }}</p>
+        <div class="hero-actions">
+          <a class="btn solid" href="{{ url_for('resume', filename='Falak_Naz_Resume.pdf') }}">View résumé ↗</a>
+          <a class="btn outline" href="#chat">Ask my AI assistant</a>
+        </div>
+        <div class="socials">
+          <a href="{{ data.github }}" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="{{ data.linkedin }}" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="hero-photo reveal">
+        <div class="photo-halo"></div>
+        <div class="photo-frame"><img src="{{ url_for('static', filename=data.photo_file) }}" alt="Falak Naz profile photo"></div>
+        <div class="photo-note">DATA · ML · AI</div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="section wrap" id="about">
+      <div class="section-label">01 / ABOUT</div>
+      <div class="two-col">
+        <h2>Building useful things<br><em>with data.</em></h2>
+        <div><p class="large">A Computer Science undergraduate at NED University with hands-on exposure to machine learning, analytics, statistics, visualization and AI product development.</p><p>My work spans real-world datasets, model training, dashboards, SQL systems and full-stack AI applications. I care about making technical work understandable and useful.</p></div>
+      </div>
+      <div class="stats">{% for s in data.stats %}<div class="stat"><strong>{{ s.value }}</strong><span>{{ s.label }}</span></div>{% endfor %}</div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="section wrap" id="experience">
+      <div class="section-label">02 / EXPERIENCE</div>
+      <div class="timeline">
+        {% for item in data.experience %}<article class="timeline-item reveal"><div class="time">{{ item.period }}</div><div class="timeline-dot"></div><div class="time-body"><h3>{{ item.role }}</h3><div class="org">{{ item.org }}</div><ul>{% for point in item.points %}<li>{{ point }}</li>{% endfor %}</ul></div></article>{% endfor %}
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="section wrap" id="projects">
+      <div class="section-label">03 / SELECTED WORK</div>
+      <div class="project-grid">
+        {% for p in data.projects %}<article class="project reveal"><div class="project-top"><span>{{ p.period }}</span><span>{{ p.role }}</span></div><h3>{{ p.name }}</h3><p>{{ p.description }}</p><div class="tags">{% for tag in p.tags %}<span>{{ tag }}</span>{% endfor %}</div><a href="{{ p.link }}" target="_blank" rel="noreferrer">View project ↗</a></article>{% endfor %}
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="section wrap" id="skills">
+      <div class="section-label">04 / TOOLKIT</div>
+      <div class="skill-grid">{% for group, skills in data.skills.items() %}<article class="skill"><h3>{{ group }}</h3><div class="tags">{% for skill in skills %}<span>{{ skill }}</span>{% endfor %}</div></article>{% endfor %}</div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="section wrap details-grid">
+      <div><div class="section-label">05 / EDUCATION</div>{% for e in data.education %}<div class="detail"><b>{{ e.degree }}</b><span>{{ e.school }}</span><small>{{ e.period }}</small></div>{% endfor %}</div>
+      <div><div class="section-label">06 / CREDENTIALS</div>{% for c in data.certifications %}<div class="line-item">{{ c }}</div>{% endfor %}</div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="section wrap chat-section" id="chat">
+      <div class="section-label">07 / ASK FALAK</div>
+      <div class="chat-intro"><div><h2>Curious about<br><em>my work?</em></h2><p>Ask the portfolio assistant anything about Falak's projects, skills, experience, education or background.</p></div><div class="prompt-chips"><button>What does Falak work on?</button><button>Tell me about Auralis AI.</button><button>What ML experience does she have?</button></div></div>
+      <div class="chat-box">
+        <div class="chat-head"><span><i></i> Falak's AI assistant</span><small>Gemini-powered</small></div>
+        <div class="messages" id="messages"><div class="bubble bot">Hi! I can answer questions about Falak's portfolio, experience, projects, skills and education. What would you like to know?</div></div>
+        <form id="chatForm"><input id="chatInput" autocomplete="off" placeholder="Ask something about Falak…"><button type="submit">Send ↗</button></form>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="section wrap contact">
+      <div><div class="section-label">08 / CONTACT</div><h2>Let's make something<br><em>useful.</em></h2></div>
+      <div class="contact-links"><a href="mailto:{{ data.email }}">{{ data.email }}</a><a href="tel:{{ data.phone }}">{{ data.phone }}</a><span>{{ data.location }}</span></div>
+    </section>
+  </main>
+  <footer>© 2026 Falak Naz <span>·</span> Data Science · Machine Learning · AI</footer>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
